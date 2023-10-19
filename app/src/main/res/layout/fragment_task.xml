@@ -29,6 +29,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:textAllCaps="false"
-        android:text="Save"/>
+        android:text="@string/Save"/>
 
 </LinearLayout>

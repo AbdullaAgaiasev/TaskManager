@@ -55,13 +55,12 @@ class OnBoardingAdapter(private val onClick: () -> Unit) :
             tvDesc.text = onBoarding.desc
             tvSkip.isVisible = adapterPosition != list.lastIndex
             btnStart.isVisible = adapterPosition == list.lastIndex
-
             btnStart.setOnClickListener {
-                onClick
+                onClick()
             }
 
             tvSkip.setOnClickListener {
-                onClick
+                onClick()
             }
             ivBoard.loadImage(onBoarding.image.toString())
         }

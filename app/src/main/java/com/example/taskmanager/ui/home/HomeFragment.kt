@@ -1,11 +1,11 @@
 package com.example.taskmanager.ui.home
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.taskmanager.App
@@ -17,10 +17,7 @@ import com.example.taskmanager.ui.home.adapter.TaskAdapter
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private var adapter = TaskAdapter(this::onLongClick)
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var adapter = TaskAdapter(this::onLongClick,this::onClick)
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -34,35 +31,43 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setData()
         binding.recyclerView.adapter = adapter
-        val data = App.db.taskDao().getAll()
-        adapter.addTasks(data)
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.taskFragment)
         }
     }
 
+    private fun onClick(task: Task){
+        findNavController().navigate(R.id.taskFragment, bundleOf(TASK_DATA to task))
+    }
+
     private fun onLongClick(task: Task) {
-
         val alert = AlertDialog.Builder(requireContext())
-        alert.setTitle("Alert!!")
-        alert.setMessage("Are you sure to delete record")
-        alert.setNegativeButton("NO") { dialog, _ ->
-            dialog?.dismiss() }
+        alert.setTitle(getString(R.string.delete_title))
+            .setMessage(getString(R.string.delete_message))
 
-        alert.setPositiveButton("YES") { dialog, _ ->
-            dialog?.dismiss()
-
-            App.db.taskDao().delete(task)
-            val tasks = App.db.taskDao().getAll()
-            adapter.addTasks(tasks)
-        }
-
+            .setNegativeButton(getString(R.string.No)) { dialog, _ -> dialog?.dismiss() }
+            .setPositiveButton(getString(R.string.Yes)) { dialog, _ ->
+                dialog?.dismiss()
+                App.db.taskDao().delete(task)
+                setData()
+            }
         alert.create().show()
+    }
+
+    private fun setData(){
+        val data = App.db.taskDao().getAll()
+        adapter.addTasks(data)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        const val TASK_DATA = "task.data"
+    }
+
 }

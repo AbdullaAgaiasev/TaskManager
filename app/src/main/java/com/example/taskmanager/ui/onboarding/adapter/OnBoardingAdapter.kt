@@ -30,8 +30,10 @@ class OnBoardingAdapter(private val onClick: () -> Unit) :
         )
     )
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnBoardingViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): OnBoardingViewHolder {
         return OnBoardingViewHolder(
             ItemOnboardingBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -47,24 +49,18 @@ class OnBoardingAdapter(private val onClick: () -> Unit) :
 
     override fun getItemCount(): Int = list.size
 
-    inner class OnBoardingViewHolder(private val binding: ItemOnboardingBinding) :
-        ViewHolder(binding.root) {
-
+    inner class OnBoardingViewHolder(
+        private val binding: ItemOnboardingBinding
+    ): ViewHolder(binding.root) {
         fun bind(onBoarding: OnBoarding) = with(binding) {
             tvTitle.text = onBoarding.title
             tvDesc.text = onBoarding.desc
             tvSkip.isVisible = adapterPosition != list.lastIndex
             btnStart.isVisible = adapterPosition == list.lastIndex
-            btnStart.setOnClickListener {
-                onClick()
-            }
-
-            tvSkip.setOnClickListener {
-                onClick()
-            }
             ivBoard.loadImage(onBoarding.image.toString())
+
+            btnStart.setOnClickListener { onClick() }
+            tvSkip.setOnClickListener { onClick() }
         }
-
     }
-
 }

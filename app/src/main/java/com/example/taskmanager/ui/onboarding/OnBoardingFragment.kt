@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
-import com.example.taskmanager.R
 import com.example.taskmanager.data.local.Pref
 import com.example.taskmanager.databinding.FragmentOnBoardingBinding
 import com.example.taskmanager.ui.onboarding.adapter.OnBoardingAdapter
@@ -33,7 +31,6 @@ class OnBoardingFragment : Fragment() {
 
         binding.viewpager.adapter = adapter
         binding.indicator.setViewPager(binding.viewpager)
-        adapter.registerAdapterDataObserver(binding.indicator.adapterDataObserver)
     }
 
     private fun onClick() {

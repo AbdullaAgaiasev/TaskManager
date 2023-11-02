@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class Task(
     @PrimaryKey(autoGenerate = true)
     val id : Int? = null,
-    val title : String? = null,
-    val desc : String? = null
+    var title : String? = null,
+    var desc : String? = null
 ): java.io.Serializable

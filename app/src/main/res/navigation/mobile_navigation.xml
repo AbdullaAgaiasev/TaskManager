@@ -33,7 +33,7 @@
         android:id="@+id/taskFragment"
         android:name="com.example.taskmanager.ui.task.TaskFragment"
         android:label="Task"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_task"/>
 
     <fragment
         android:id="@+id/onBoardingFragment"

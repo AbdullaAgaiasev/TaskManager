@@ -2,7 +2,6 @@ package com.example.taskmanager.ui.profile
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,12 +43,13 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.etName.setText(pref.getName())
+        binding.etSurname.setText(pref.getSurname())
         binding.profileImage.loadImage(pref.getImage())
 
         binding.btnSaveProfile.setOnClickListener {
             pref.setName(binding.etName.text.toString())
+            pref.setSurname(binding.etSurname.text.toString())
         }
 
         binding.profileImage.setOnClickListener {

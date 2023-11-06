@@ -14,4 +14,5 @@
     <string name="delete_message">"Вы действителтно хотите удалить эти данные? "</string>
     <string name="No">Нет</string>
     <string name="Yes">Да</string>
+    <string name="success_msg">Auth is success!!!</string>
 </resources>

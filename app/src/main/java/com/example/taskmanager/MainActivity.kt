@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.taskmanager.data.local.Pref
 import com.example.taskmanager.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +31,11 @@ class MainActivity : AppCompatActivity() {
 
         if (!pref.isShow())
         navController.navigate(R.id.onBoardingFragment)
+
+        if (FirebaseAuth.getInstance().currentUser?.uid == null) {
+            navController.navigate(R.id.phoneFragment)
+        }
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,

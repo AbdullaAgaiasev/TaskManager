@@ -55,6 +55,5 @@ class TaskFragment : Fragment() {
             desc = binding.etDesc.text.toString()
         )
         App.db.taskDao().insert(data)
-        findNavController().navigateUp()
     }
 }

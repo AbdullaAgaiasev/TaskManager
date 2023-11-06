@@ -1,9 +1,9 @@
 package com.example.taskmanager.ui.home.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -40,40 +40,24 @@ class TaskAdapter(
 
     override fun getItemCount() = list.size
 
-    @SuppressLint("ResourceAsColor")
+
     override fun onBindViewHolder(
         holder: TaskViewHolder,
         position: Int
     ) {
         holder.bind(list.get(position))
-
-        if (position % 2 == 0) {
-            // Четная позиция, устанавливаем черный цвет фона
-            holder.itemView.setBackgroundResource(R.color.black)
-            holder.textView.setTextColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.white
-                )
-            )
-            holder.descTextView.setTextColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.white
-                )
-            ) } else {
-            // Нечетная позиция, устанавливаем белый цвет фона
-            holder.itemView.setBackgroundResource(R.color.white)
-        }
     }
 
 
     inner class TaskViewHolder(
         private val binding: ItemTaskBinding
     ) : ViewHolder(binding.root) {
-        val textView: TextView = itemView.findViewById(R.id.tv_title2)
-        val descTextView: TextView = itemView.findViewById(R.id.tv_desc2)
         fun bind(task: Task) {
+
+            itemView.setBackgroundColor(if (adapterPosition % 2 == 0 ) Color.BLACK else Color.WHITE)
+            binding.tvTitle2.setTextColor(if (adapterPosition % 2 == 0 ) Color.WHITE else Color.BLACK)
+            binding.tvDesc2.setTextColor(if (adapterPosition % 2 == 0 ) Color.WHITE else Color.BLACK)
+
             binding.tvTitle2.text = task.title
             binding.tvDesc2.text = task.desc
 

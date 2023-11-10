@@ -15,4 +15,5 @@
     <string name="No">Нет</string>
     <string name="Yes">Да</string>
     <string name="success_msg">Auth is success!!!</string>
+    <string name="upload_success">Данные успешно сохранены!</string>
 </resources>

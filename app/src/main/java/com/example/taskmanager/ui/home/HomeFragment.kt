@@ -46,7 +46,6 @@ class HomeFragment : Fragment() {
         val alert = AlertDialog.Builder(requireContext())
         alert.setTitle(getString(R.string.delete_title))
             .setMessage(getString(R.string.delete_message))
-
             .setNegativeButton(getString(R.string.No)) { dialog, _ -> dialog?.dismiss() }
             .setPositiveButton(getString(R.string.Yes)) { dialog, _ ->
                 dialog?.dismiss()
